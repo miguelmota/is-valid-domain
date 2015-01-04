@@ -1,0 +1,22 @@
+{
+  "name": "is-valid-domain",
+  "main": "is-valid-domain.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/miguelmota/is-valid-domain",
+  "authors": [
+    "Miguel Mota <miguelmota2@gmail.com>"
+  ],
+  "description": "Generate an array of dates",
+  "keywords": [
+    "validate",
+    "domain"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "license": "MIT"
+}
