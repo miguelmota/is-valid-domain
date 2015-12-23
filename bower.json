@@ -6,7 +6,7 @@
   "authors": [
     "Miguel Mota <miguelmota2@gmail.com>"
   ],
-  "description": "Generate an array of dates",
+  "description": "Validate domain name",
   "keywords": [
     "validate",
     "domain"
