@@ -23,7 +23,7 @@
     "url": "https://github.com/miguelmota/is-valid-domain/issues"
   },
   "homepage": "https://github.com/miguelmota/is-valid-domain",
-  "dependencies": {
+  "devDependencies": {
     "tape": "^3.0.3"
   },
   "testling": {
