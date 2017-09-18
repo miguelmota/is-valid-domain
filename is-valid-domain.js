@@ -1,9 +1,23 @@
 (function(root) {
 
   function isValidDomain(v) {
-    if (!v) return false;
-    var re = /^(?!:\/\/)([a-zA-Z0-9-]+\.){0,5}[a-zA-Z0-9-][a-zA-Z0-9-]+\.[a-zA-Z]{2,64}?$/gi;
-    return re.test(v);
+    if (typeof v !== 'string') return false
+
+    var parts = v.split('.')
+    if (parts.length <= 1) return false
+
+    var tld = parts.pop()
+    var tldRegex = /^[a-zA-Z0-9]+$/gi
+
+    if (!tldRegex.test(tld)) return false
+
+    var isValid = parts.every(function(host) {
+      var hostRegex = /^(?!:\/\/)([a-zA-Z0-9]+|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])$/gi;
+
+      return hostRegex.test(host)
+    })
+
+    return isValid
   }
 
   if (typeof exports !== 'undefined') {

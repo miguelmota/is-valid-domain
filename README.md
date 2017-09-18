@@ -18,10 +18,13 @@ isValidDomain('foo.example.com') // true
 isValidDomain('bar.foo.example.com') // true
 isValidDomain('exa-mple.co.uk') // true
 isValidDomain('exa_mple.com') // false
+isValidDomain('-example.co.uk') // true
 isValidDomain('example') // false
 isValidDomain('ex*mple.com') // false
 isValidDomain(3434) // false
 ```
+
+view more [examples](./test/is-valid-domain.js)
 
 # License
 
