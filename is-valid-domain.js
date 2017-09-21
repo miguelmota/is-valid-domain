@@ -7,6 +7,15 @@
     if (parts.length <= 1) return false
 
     var tld = parts.pop()
+
+    // check if it has a port and it's valid
+    if(tld.indexOf(':') > 0) {
+      var lp = tld.split(':');
+      tld = lp[0];
+      var port = +lp[1];
+      if (lp[1] !== port.toString() || port < 1 || port > 65535) return false;
+    }
+
     var tldRegex = /^[a-zA-Z0-9]+$/gi
 
     if (!tldRegex.test(tld)) return false
