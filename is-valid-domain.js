@@ -12,7 +12,7 @@
     if (!tldRegex.test(tld)) return false
 
     var isValid = parts.every(function(host) {
-      var hostRegex = /^(?!:\/\/)([a-zA-Z0-9]+|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])$/gi;
+      var hostRegex = /^(?!:\/\/|\d)([a-zA-Z0-9]+|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])$/gi;
 
       return hostRegex.test(host)
     })
