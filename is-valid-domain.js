@@ -7,7 +7,7 @@
     if (parts.length <= 1) return false
 
     var tld = parts.pop()
-    var tldRegex = /^[a-zA-Z0-9]+$/gi
+    var tldRegex = /^(?:xn--)?[a-zA-Z0-9]+$/gi
 
     if (!tldRegex.test(tld)) return false
 
