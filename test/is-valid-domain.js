@@ -1,8 +1,8 @@
 var test = require('tape');
 var isValidDomain = require('../is-valid-domain');
 
-test('is valid domain', function (t) {
-  t.plan(31);
+test('is valid domain', function(t) {
+  t.plan(32);
 
   t.equal(isValidDomain('example.com'), true);
   t.equal(isValidDomain('foo.example.com'), true);
@@ -37,4 +37,5 @@ test('is valid domain', function (t) {
   t.equal(isValidDomain('xn--ber-goa.com'), true);
 
   t.equal(isValidDomain('xn--6qq79v.xn--fiqz9s'), true);
+  t.equal(isValidDomain('*.example.com'), true);
 });
