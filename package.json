@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/miguelmota/is-valid-domain",
   "devDependencies": {
-    "tape": "^3.0.3"
+    "tape": "^4.9.2"
   },
   "testling": {
     "files": "test/*.js",
