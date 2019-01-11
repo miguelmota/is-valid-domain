@@ -17,11 +17,20 @@ isValidDomain('example.com') // true
 isValidDomain('foo.example.com') // true
 isValidDomain('bar.foo.example.com') // true
 isValidDomain('exa-mple.co.uk') // true
+isValidDomain('xn--80ak6aa92e.com') // true
 isValidDomain('exa_mple.com') // false
 isValidDomain('-example.co.uk') // false
 isValidDomain('example') // false
 isValidDomain('ex*mple.com') // false
+isValidDomain('*.example.com') // false
+isValidDomain('*.com') // false
 isValidDomain(3434) // false
+
+isValidDomain('foo.example.com', {subdomain: true}) // true
+isValidDomain('foo.example.com', {subdomain: false}) // false
+isValidDomain('*.example.com', {wildcard: false}) // false
+isValidDomain('*.example.com', {wildcard: true}) // true
+isValidDomain('*.example.com', {subdomain: false, wildcard: true}) // false
 ```
 
 view more [examples](./test/is-valid-domain.js)

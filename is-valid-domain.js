@@ -1,7 +1,8 @@
 (function(root) {
 
-  function isValidDomain(v) {
+  function isValidDomain(v, opts) {
     if (typeof v !== 'string') return false
+    if (!(opts instanceof Object)) opts = {}
 
     var parts = v.split('.')
     if (parts.length <= 1) return false
@@ -10,10 +11,11 @@
     var tldRegex = /^(?:xn--)?[a-zA-Z0-9]+$/gi
 
     if (!tldRegex.test(tld)) return false
+    if (opts.subdomain == false && parts.length > 1) return false
 
     var isValid = parts.every(function(host, index) {
-      if (index === 0 && host === '*') return true
-      
+      if (opts.wildcard && index === 0 && host === '*' && parts.length > 1) return true
+
       var hostRegex = /^(?!:\/\/)([a-zA-Z0-9]+|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])$/gi;
 
       return hostRegex.test(host)

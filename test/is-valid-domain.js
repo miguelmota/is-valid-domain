@@ -2,8 +2,9 @@ var test = require('tape');
 var isValidDomain = require('../is-valid-domain');
 
 test('is valid domain', function(t) {
-  t.plan(32);
+  t.plan(51);
 
+  // tld and subdomains
   t.equal(isValidDomain('example.com'), true);
   t.equal(isValidDomain('foo.example.com'), true);
   t.equal(isValidDomain('bar.foo.example.com'), true);
@@ -13,10 +14,18 @@ test('is valid domain', function(t) {
   t.equal(isValidDomain('foo.bar.baz'), true);
   t.equal(isValidDomain('foo-bar.ba-z.qux'), true);
   t.equal(isValidDomain('hello.world'), true);
+  t.equal(isValidDomain('ex-am-ple.com'), true);
+  t.equal(isValidDomain('xn--80ak6aa92e.com'), true)
 
+  // unicode
+  t.equal(isValidDomain('xn--6qq79v.xn--fiqz9s'), true);
+  t.equal(isValidDomain('xn--ber-goa.com'), true);
+
+  // invalid tld and subdomains
   t.equal(isValidDomain('bar.q-ux'), false);
   t.equal(isValidDomain('exa_mple.com'), false);
   t.equal(isValidDomain('example'), false);
+  t.equal(isValidDomain(''), false);
   t.equal(isValidDomain({}), false);
   t.equal(isValidDomain(function(){}), false);
   t.equal(isValidDomain('ex*mple.com'), false);
@@ -24,6 +33,7 @@ test('is valid domain', function(t) {
   t.equal(isValidDomain(3434), false);
   t.equal(isValidDomain('_example.com'), false);
   t.equal(isValidDomain('-example.com'), false);
+  t.equal(isValidDomain('xn–pple-43d.com'), false)
   t.equal(isValidDomain('foo._example.com'), false);
   t.equal(isValidDomain('foo.-example.com'), false);
   t.equal(isValidDomain('foo.example-.co.uk'), false);
@@ -33,9 +43,25 @@ test('is valid domain', function(t) {
   t.equal(isValidDomain('foo.example_.com'), false);
   t.equal(isValidDomain('example.com-'), false);
   t.equal(isValidDomain('example.com_'), false);
-  t.equal(isValidDomain('ex-am-ple.com'), true);
-  t.equal(isValidDomain('xn--ber-goa.com'), true);
+  t.equal(isValidDomain('-foo.example.com_'), false);
+  t.equal(isValidDomain('_foo.example.com_'), false);
+  t.equal(isValidDomain('*.com_'), false);
+  t.equal(isValidDomain('*.*.com_'), false);
 
-  t.equal(isValidDomain('xn--6qq79v.xn--fiqz9s'), true);
-  t.equal(isValidDomain('*.example.com'), true);
+  // subdomain
+  t.equal(isValidDomain('example.com'), true);
+  t.equal(isValidDomain('foo.example.com'), true);
+  t.equal(isValidDomain('foo.example.com', {subdomain: true}), true);
+  t.equal(isValidDomain('foo.example.com', {subdomain: false}), false);
+  t.equal(isValidDomain('example.com', {subdomain: false}), true);
+  t.equal(isValidDomain('*.example.com', {subdomain: true}), false);
+
+  // wildcard
+  t.equal(isValidDomain('*.example.com'), false);
+  t.equal(isValidDomain('*.example.com', {wildcard:false}), false);
+  t.equal(isValidDomain('*.example.com', {wildcard:true}), true);
+  t.equal(isValidDomain('*.*.com', {wildcard:true}), false);
+  t.equal(isValidDomain('*.com', {wildcard:true}), false);
+  t.equal(isValidDomain('*.example.com', {subdomain: true, wildcard: true}), true);
+  t.equal(isValidDomain('*.example.com', {subdomain: false, wildcard: true}), false);
 });
