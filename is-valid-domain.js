@@ -11,7 +11,9 @@
 
     if (!tldRegex.test(tld)) return false
 
-    var isValid = parts.every(function(host) {
+    var isValid = parts.every(function(host, index) {
+      if (index === 0 && host === '*') return true
+      
       var hostRegex = /^(?!:\/\/)([a-zA-Z0-9]+|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])$/gi;
 
       return hostRegex.test(host)
