@@ -1,14 +1,18 @@
 # is-valid-domain
 
-Validate domain name
+> Validate domain name in JavaScript
 
-# Install
+## Demo
+
+[https://lab.miguelmota.com/is-valid-domain](https://lab.miguelmota.com/is-valid-domain)
+
+## Install
 
 ```bash
 npm install is-valid-domain
 ```
 
-# Usage
+## Usage
 
 ```javascript
 var isValidDomain = require('is-valid-domain');
@@ -35,6 +39,6 @@ isValidDomain('*.example.com', {subdomain: false, wildcard: true}) // false
 
 view more [examples](./test/is-valid-domain.js)
 
-# License
+## License
 
-MIT
+[MIT](LICENSE)

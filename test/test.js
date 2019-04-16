@@ -1,5 +1,5 @@
 var test = require('tape');
-var isValidDomain = require('../is-valid-domain');
+var isValidDomain = require('../');
 
 test('is valid domain', function(t) {
   t.plan(59);
