@@ -2,7 +2,7 @@ var test = require('tape');
 var isValidDomain = require('../is-valid-domain');
 
 test('is valid domain', function(t) {
-  t.plan(56);
+  t.plan(59);
 
   // tld and subdomains
   t.equal(isValidDomain('example.com'), true);
@@ -16,6 +16,9 @@ test('is valid domain', function(t) {
   t.equal(isValidDomain('hello.world'), true);
   t.equal(isValidDomain('ex-am-ple.com'), true);
   t.equal(isValidDomain('xn--80ak6aa92e.com'), true)
+  t.equal(isValidDomain('example.a9'), true);
+  t.equal(isValidDomain('example.9a'), true);
+  t.equal(isValidDomain('example.99'), false);
 
   // unicode
   t.equal(isValidDomain('xn--6qq79v.xn--fiqz9s'), true);

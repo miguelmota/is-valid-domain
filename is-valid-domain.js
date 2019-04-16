@@ -21,7 +21,7 @@ module.exports = function isValidDomain(v, opts) {
     if (parts.length <= 1) return false
 
     tld = parts.pop()
-    var tldRegex = /^(?:xn--)?[a-z0-9]+$/gi
+    var tldRegex = /^(?:xn--)?(?!^\d+$)[a-z0-9]+$/gi
 
     if (!tldRegex.test(tld)) return false
   }
