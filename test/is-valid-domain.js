@@ -2,7 +2,7 @@ var test = require('tape');
 var isValidDomain = require('../is-valid-domain');
 
 test('is valid domain', function(t) {
-  t.plan(51);
+  t.plan(56);
 
   // tld and subdomains
   t.equal(isValidDomain('example.com'), true);
@@ -55,6 +55,13 @@ test('is valid domain', function(t) {
   t.equal(isValidDomain('foo.example.com', {subdomain: false}), false);
   t.equal(isValidDomain('example.com', {subdomain: false}), true);
   t.equal(isValidDomain('*.example.com', {subdomain: true}), false);
+
+  // second level domain
+  t.equal(isValidDomain('example.co.uk'), true);
+  t.equal(isValidDomain('exampl1.co.uk', {subdomain: false}), true);
+  t.equal(isValidDomain('abc.example.co.uk', {subdomain: false}), false);
+  t.equal(isValidDomain('*.example.co.uk', {subdomain: true}), false);
+  t.equal(isValidDomain('*.example.co.uk', {subdomain: true, wildcard: true}), true);
 
   // wildcard
   t.equal(isValidDomain('*.example.com'), false);
