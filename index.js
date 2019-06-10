@@ -5,6 +5,11 @@ module.exports = function isValidDomain(v, opts) {
   if (!(opts instanceof Object)) opts = {}
   v = v.toLowerCase()
 
+  var validChars = /^([a-z0-9-.*]+)$/g
+  if (!validChars.test(v)) {
+    return false
+  }
+
   var sldRegex = /(.*)\.(([a-z0-9]+)(\.[a-z0-9]+))/
   var matches = v.match(sldRegex)
   var tld = null

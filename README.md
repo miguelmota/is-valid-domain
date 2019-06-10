@@ -15,7 +15,7 @@ npm install is-valid-domain
 ## Usage
 
 ```javascript
-var isValidDomain = require('is-valid-domain');
+const isValidDomain = require('is-valid-domain')
 
 isValidDomain('example.com') // true
 isValidDomain('foo.example.com') // true
@@ -37,7 +37,7 @@ isValidDomain('*.example.com', {wildcard: true}) // true
 isValidDomain('*.example.com', {subdomain: false, wildcard: true}) // false
 ```
 
-view more [examples](./test/is-valid-domain.js)
+view more [examples](./test/test.js)
 
 ## License
 
