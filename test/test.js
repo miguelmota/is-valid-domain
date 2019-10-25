@@ -2,7 +2,7 @@ var test = require('tape')
 var isValidDomain = require('../')
 
 test('is valid domain', function(t) {
-  t.plan(67)
+  t.plan(79)
 
   // tld and subdomains
   t.equal(isValidDomain('example.com'), true)
@@ -56,6 +56,18 @@ test('is valid domain', function(t) {
   t.equal(isValidDomain('foo.example.com'), true)
   t.equal(isValidDomain('foo.example.com', {subdomain: true}), true)
   t.equal(isValidDomain('foo.example.com', {subdomain: false}), false)
+  t.equal(isValidDomain('-foo.example.com', {subdomain: true}), false)
+  t.equal(isValidDomain('foo-.example.com', {subdomain: true}), false)
+  t.equal(isValidDomain('-foo-.example.com', {subdomain: true}), false)
+  t.equal(isValidDomain('-foo.example.com'), false)
+  t.equal(isValidDomain('foo-.example.com'), false)
+  t.equal(isValidDomain('-foo-.example.com'), false)
+  t.equal(isValidDomain('foo-.bar.example.com'), false)
+  t.equal(isValidDomain('-foo.bar.example.com'), false)
+  t.equal(isValidDomain('-foo-.bar.example.com'), false)
+  t.equal(isValidDomain('-fo-.bar.example.com', {subdomain: true}), false)
+  t.equal(isValidDomain('foo-.bar.example.com', {subdomain: true}), false)
+  t.equal(isValidDomain('-foo-.bar.example.com', {subdomain: true}), false)
   t.equal(isValidDomain('example.com', {subdomain: false}), true)
   t.equal(isValidDomain('*.example.com', {subdomain: true}), false)
 
