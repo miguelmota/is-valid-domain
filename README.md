@@ -48,7 +48,7 @@ npm test
 
 ## Related
 
-- [is-valid-hostname](https://github.com/miguelmota/is-valid-hostname)
+- [`is-valid-hostname`](https://github.com/miguelmota/is-valid-hostname)
 
 ## License
 
