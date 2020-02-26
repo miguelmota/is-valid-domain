@@ -40,7 +40,15 @@ isValidDomain('*.example.com', {subdomain: false, wildcard: true}) // false
 
 view more [examples](./test/test.js)
 
-Also check out [is-valid-hostname](https://github.com/miguelmota/is-valid-hostname) to validate hostnames.
+## Test
+
+```bash
+npm test
+```
+
+## Related
+
+- [is-valid-hostname](https://github.com/miguelmota/is-valid-hostname)
 
 ## License
 
