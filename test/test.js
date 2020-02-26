@@ -2,7 +2,7 @@ var test = require('tape')
 var isValidDomain = require('../')
 
 test('is valid domain', function(t) {
-  t.plan(91)
+  t.plan(95)
 
   // tld and subdomains
   t.equal(isValidDomain('example.com'), true)
@@ -24,6 +24,8 @@ test('is valid domain', function(t) {
   t.equal(isValidDomain('xn--6qq79v.xn--fiqz9s'), true)
   t.equal(isValidDomain('xn--ber-goa.com'), true)
   t.equal(isValidDomain('xn--a--ber-goa.com'), false)
+  t.equal(isValidDomain('xn--c1yn36f.example.com'), true)
+  t.equal(isValidDomain('xn--addas-o4a.de'), true)
 
   // invalid tld and subdomains
   t.equal(isValidDomain('localhost'), false)
@@ -73,6 +75,7 @@ test('is valid domain', function(t) {
 
   // subomdain underscores
   t.equal(isValidDomain('_dnslink.ipfs.io'), true)
+  t.equal(isValidDomain('_dnslink.ip_fs.io'), false)
   t.equal(isValidDomain('_foo.example.com'), true)
   t.equal(isValidDomain('xn--_eamop.donata.com'), true)
   t.equal(isValidDomain('__foo.example.com'), true)
@@ -104,7 +107,7 @@ test('is valid domain', function(t) {
   t.equal(isValidDomain({}), false)
   t.equal(isValidDomain(function(){}), false)
 
-  // junk
+  // invalid values
   t.equal(isValidDomain('foo.example.com*'), false)
   t.equal(isValidDomain('foo.example.com*', {wildcard: true}), false)
   t.equal(isValidDomain(`google.com"\'\"\""\\"\\'test test`), false)
@@ -114,4 +117,5 @@ test('is valid domain', function(t) {
   t.equal(isValidDomain('.example.'), false)
   t.equal(isValidDomain('.example.com'), false)
   t.equal(isValidDomain('"example.com"'), false)
+  t.equal(isValidDomain('http://xn--addas-o4a.de'), false)
 })
