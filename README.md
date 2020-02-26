@@ -22,6 +22,7 @@ isValidDomain('foo.example.com') // true
 isValidDomain('bar.foo.example.com') // true
 isValidDomain('exa-mple.co.uk') // true
 isValidDomain('xn--80ak6aa92e.com') // true
+isValidDomain('_dnslink.ipfs.io') // true
 isValidDomain('exa_mple.com') // false
 isValidDomain('-example.co.uk') // false
 isValidDomain('example') // false
@@ -38,6 +39,8 @@ isValidDomain('*.example.com', {subdomain: false, wildcard: true}) // false
 ```
 
 view more [examples](./test/test.js)
+
+Also check out [is-valid-hostname](https://github.com/miguelmota/is-valid-hostname) to validate hostnames.
 
 ## License
 

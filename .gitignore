@@ -97,7 +97,12 @@ _archive
 uploads
 tmp
 
+# Files to ignore #
+#######################
+package-lock.json
+
 # Vim files to ignore #
 #######################
 .VimballRecord
 .netrwhist
+

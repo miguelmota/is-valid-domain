@@ -1,44 +1,70 @@
-var sldMap= require('./domains/sld')
+const sldMap = require('./domains/sld')
 
-module.exports = function isValidDomain(v, opts) {
-  if (typeof v !== 'string') return false
+module.exports = function isValidDomain(value, opts) {
+  if (typeof value !== 'string') return false
   if (!(opts instanceof Object)) opts = {}
-  v = v.toLowerCase()
+  value = value.toLowerCase()
 
-  var validChars = /^([a-z0-9-.*]+)$/g
-  if (!validChars.test(v)) {
+  if (value.endsWith('.')) {
+    value = value.slice(0, value.length-1)
+  }
+
+  if (value.length > 253) {
     return false
   }
 
-  var sldRegex = /(.*)\.(([a-z0-9]+)(\.[a-z0-9]+))/
-  var matches = v.match(sldRegex)
+  const validChars = /^([a-z0-9-._*]+)$/g
+  if (!validChars.test(value)) {
+    return false
+  }
+
+  const sldRegex = /(.*)\.(([a-z0-9]+)(\.[a-z0-9]+))/
+  const matches = value.match(sldRegex)
   var tld = null
-  var parts = null
+  var labels = null
   if (matches && matches.length > 2) {
     if (sldMap[matches[2]]) {
       tld = matches[2]
-      parts = matches[1].split('.')
+      labels = matches[1].split('.')
     }
   }
 
-  if (!parts) {
-    parts = v.split('.')
-    if (parts.length <= 1) return false
+  if (!labels) {
+    labels = value.split('.')
+    if (labels.length <= 1) return false
 
-    tld = parts.pop()
-    var tldRegex = /^(?:xn--)?(?!^\d+$)[a-z0-9]+$/gi
+    tld = labels.pop()
+    const tldRegex = /^(?:xn--)?(?!^\d+$)[a-z0-9]+$/gi
 
     if (!tldRegex.test(tld)) return false
   }
 
-  if (opts.subdomain == false && parts.length > 1) return false
+  if (opts.subdomain == false && labels.length > 1) return false
 
-  var isValid = parts.every(function(host, index) {
-    if (opts.wildcard && index === 0 && host === '*' && parts.length > 1) return true
+  const isValid = labels.every(function(label, index) {
+    if (opts.wildcard && index === 0 && label === '*' && labels.length > 1) {
+      return true
+    }
 
-    var hostRegex = /^(?!:\/\/)([a-z0-9]+|[a-z0-9][a-z0-9-]*[a-z0-9])$/gi;
+    let validLabelChars = /^([a-zA-Z0-9-_]+)$/g
+    if (index === labels.length - 1) {
+      validLabelChars = /^([a-zA-Z0-9-]+)$/g
+    }
 
-    return hostRegex.test(host)
+    const doubleDashCount = (label.match(/--/g) || []).length
+    const xnDashCount = (label.match(/xn--/g) || []).length
+    if (doubleDashCount !== xnDashCount) {
+      return false
+    }
+
+    const isValid = (
+      validLabelChars.test(label) &&
+      label.length < 64 &&
+      !label.startsWith('-') &&
+      !label.endsWith('-')
+    )
+
+    return isValid
   })
 
   return isValid

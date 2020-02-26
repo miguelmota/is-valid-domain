@@ -2,7 +2,7 @@ var test = require('tape')
 var isValidDomain = require('../')
 
 test('is valid domain', function(t) {
-  t.plan(80)
+  t.plan(91)
 
   // tld and subdomains
   t.equal(isValidDomain('example.com'), true)
@@ -20,20 +20,19 @@ test('is valid domain', function(t) {
   t.equal(isValidDomain('example.9a'), true)
   t.equal(isValidDomain('example.99'), false)
 
-  // unicode
+  // punycode
   t.equal(isValidDomain('xn--6qq79v.xn--fiqz9s'), true)
   t.equal(isValidDomain('xn--ber-goa.com'), true)
+  t.equal(isValidDomain('xn--a--ber-goa.com'), false)
 
   // invalid tld and subdomains
+  t.equal(isValidDomain('localhost'), false)
+  t.equal(isValidDomain('127.0.0.1'), false)
   t.equal(isValidDomain('bar.q-ux'), false)
   t.equal(isValidDomain('exa_mple.com'), false)
   t.equal(isValidDomain('example'), false)
-  t.equal(isValidDomain(''), false)
-  t.equal(isValidDomain({}), false)
-  t.equal(isValidDomain(function(){}), false)
   t.equal(isValidDomain('ex*mple.com'), false)
   t.equal(isValidDomain('@#$@#$%fd'), false)
-  t.equal(isValidDomain(3434), false)
   t.equal(isValidDomain('_example.com'), false)
   t.equal(isValidDomain('-example.com'), false)
   t.equal(isValidDomain('xn–pple-43d.com'), false)
@@ -72,6 +71,12 @@ test('is valid domain', function(t) {
   t.equal(isValidDomain('example.com', {subdomain: false}), true)
   t.equal(isValidDomain('*.example.com', {subdomain: true}), false)
 
+  // subomdain underscores
+  t.equal(isValidDomain('_dnslink.ipfs.io'), true)
+  t.equal(isValidDomain('_foo.example.com'), true)
+  t.equal(isValidDomain('xn--_eamop.donata.com'), true)
+  t.equal(isValidDomain('__foo.example.com'), true)
+
   // second level domain
   t.equal(isValidDomain('example.co.uk'), true)
   t.equal(isValidDomain('exampl1.co.uk', {subdomain: false}), true)
@@ -88,12 +93,24 @@ test('is valid domain', function(t) {
   t.equal(isValidDomain('*.example.com', {subdomain: true, wildcard: true}), true)
   t.equal(isValidDomain('*.example.com', {subdomain: false, wildcard: true}), false)
 
+  // valid length
+  t.equal(isValidDomain(`${'a'.repeat(63)}.${'b'.repeat(63)}.${'c'.repeat(63)}.${'c'.repeat(61)}`), true)
+  t.equal(isValidDomain(`${'a'.repeat(63)}.${'b'.repeat(63)}.${'c'.repeat(63)}.${'c'.repeat(61)}.`), true)
+  t.equal(isValidDomain(`${'a'.repeat(63)}.${'b'.repeat(63)}.${'c'.repeat(63)}.${'c'.repeat(62)}`), false)
+
+  // invalid types
+  t.equal(isValidDomain(3434), false)
+  t.equal(isValidDomain(''), false)
+  t.equal(isValidDomain({}), false)
+  t.equal(isValidDomain(function(){}), false)
+
   // junk
   t.equal(isValidDomain('foo.example.com*'), false)
   t.equal(isValidDomain('foo.example.com*', {wildcard: true}), false)
   t.equal(isValidDomain(`google.com"\'\"\""\\"\\'test test`), false)
   t.equal(isValidDomain(`google.com.au'"\'\"\""\\"\\'test`), false)
   t.equal(isValidDomain('...'), false)
+  t.equal(isValidDomain('example..com'), false)
   t.equal(isValidDomain('.example.'), false)
   t.equal(isValidDomain('.example.com'), false)
   t.equal(isValidDomain('"example.com"'), false)

@@ -1,6 +1,6 @@
 {
   "name": "is-valid-domain",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Validate domain name",
   "main": "index.js",
   "scripts": {
@@ -12,8 +12,16 @@
     "url": "https://github.com/miguelmota/is-valid-domain"
   },
   "keywords": [
+    "valid",
     "validate",
-    "domain"
+    "validator",
+    "check",
+    "checker",
+    "domain",
+    "subdomain",
+    "wildcard",
+    "host",
+    "hostname"
   ],
   "author": {
     "name": "Miguel Mota",
