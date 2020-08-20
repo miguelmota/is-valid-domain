@@ -46,10 +46,6 @@ view more [examples](./test/test.js)
 npm test
 ```
 
-## Related
-
-- [`is-valid-hostname`](https://github.com/miguelmota/is-valid-hostname)
-
 ## License
 
 [MIT](LICENSE)
