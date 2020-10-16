@@ -2,7 +2,7 @@ var test = require('tape')
 var isValidDomain = require('../')
 
 test('is valid domain', function(t) {
-  t.plan(95)
+  t.plan(98)
 
   // tld and subdomains
   t.equal(isValidDomain('example.com'), true)
@@ -55,6 +55,7 @@ test('is valid domain', function(t) {
   // subdomain
   t.equal(isValidDomain('example.com'), true)
   t.equal(isValidDomain('foo.example.com'), true)
+  t.equal(isValidDomain('example.com', {subdomain: true}), true)
   t.equal(isValidDomain('foo.example.com', {subdomain: true}), true)
   t.equal(isValidDomain('foo.example.com', {subdomain: false}), false)
   t.equal(isValidDomain('-foo.example.com', {subdomain: true}), false)
@@ -93,6 +94,8 @@ test('is valid domain', function(t) {
   t.equal(isValidDomain('*.example.com', {wildcard:true}), true)
   t.equal(isValidDomain('*.*.com', {wildcard:true}), false)
   t.equal(isValidDomain('*.com', {wildcard:true}), false)
+  t.equal(isValidDomain('example.com', {wildcard: true}), true)
+  t.equal(isValidDomain('example.com', {subdomain: true, wildcard: true}), true)
   t.equal(isValidDomain('*.example.com', {subdomain: true, wildcard: true}), true)
   t.equal(isValidDomain('*.example.com', {subdomain: false, wildcard: true}), false)
 
