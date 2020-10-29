@@ -431,6 +431,8 @@
 .id,.mil.id
 .id,.go.id
 .id,.war.net.id
+.id,.my.id
+.id,.biz.id
 .il,.ac.il
 .il,.co.il
 .il,.org.il
