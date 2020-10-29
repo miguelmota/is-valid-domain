@@ -1,12 +1,12 @@
-const sldMap = require('./domains/sld')
+const sldMap = require('./data/sldMap.json')
 
-module.exports = function isValidDomain(value, opts) {
+module.exports = function isValidDomain (value, opts) {
   if (typeof value !== 'string') return false
   if (!(opts instanceof Object)) opts = {}
   value = value.toLowerCase()
 
   if (value.endsWith('.')) {
-    value = value.slice(0, value.length-1)
+    value = value.slice(0, value.length - 1)
   }
 
   if (value.length > 253) {
@@ -39,9 +39,9 @@ module.exports = function isValidDomain(value, opts) {
     if (!tldRegex.test(tld)) return false
   }
 
-  if (opts.subdomain == false && labels.length > 1) return false
+  if (opts.subdomain === false && labels.length > 1) return false
 
-  const isValid = labels.every(function(label, index) {
+  const isValid = labels.every(function (label, index) {
     if (opts.wildcard && index === 0 && label === '*' && labels.length > 1) {
       return true
     }

@@ -46,6 +46,14 @@ view more [examples](./test/test.js)
 npm test
 ```
 
+## Contributing
+
+Adding new domains:
+
+- Add second level domain to `data/second_level_domains.csv`
+- Run `npm run generate` to generate JSON map file
+- Run `npm test`
+
 ## License
 
 [MIT](LICENSE)

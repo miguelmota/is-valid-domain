@@ -1,11 +1,13 @@
 {
   "name": "is-valid-domain",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Validate domain name",
   "main": "index.js",
   "scripts": {
     "test": "tape test/*.js",
-    "build:example": "browserify example/main.js -o example/dist/bundle.js"
+    "lint": "standard --fix index.js",
+    "build:example": "browserify example/main.js -o example/dist/bundle.js",
+    "generate": "node data/generate.js"
   },
   "repository": {
     "type": "git",
@@ -38,6 +40,7 @@
   "homepage": "https://github.com/miguelmota/is-valid-domain",
   "devDependencies": {
     "browserify": "^16.2.3",
+    "standard": "^15.0.1",
     "tape": "^4.9.2"
   },
   "testling": {

@@ -10,5 +10,5 @@ for (var i = 0; i < lines.length; i++) {
   list[domain] = true
 }
 
-fs.writeFileSync(path.resolve(__dirname, 'sld.json'), JSON.stringify(list))
+fs.writeFileSync(path.resolve(__dirname, 'sldMap.json'), JSON.stringify(list, null, 2))
 console.log('done')
