@@ -54,6 +54,12 @@ Adding new domains:
 - Run `npm run generate` to generate JSON map file
 - Run `npm test`
 
+## FAQ
+
+- Q: Why is trailing dot `.` in domain names verified as `true`?
+
+  - A: Fully qualified domain names allow the trailing dot which represents the root zone. More info [here](http://www.dns-sd.org/trailingdotsindomainnames.html) and [here](https://en.wikipedia.org/wiki/Fully_qualified_domain_name).
+
 ## License
 
 [MIT](LICENSE)
