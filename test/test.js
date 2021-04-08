@@ -3,7 +3,7 @@ var isValidDomain = require('../')
 var sldMap = require('../data/sldMap.json')
 
 test('is valid domain', function (t) {
-  t.plan(98 + Object.keys(sldMap).length)
+  t.plan(103 + Object.keys(sldMap).length)
 
   // tld and subdomains
   t.equal(isValidDomain('example.com'), true)
@@ -22,7 +22,7 @@ test('is valid domain', function (t) {
   t.equal(isValidDomain('example.99'), false)
 
   // test all second level domains
-  for (let sld in sldMap) {
+  for (const sld in sldMap) {
     t.equal(isValidDomain(`example.${sld}`), true)
   }
 
@@ -32,6 +32,13 @@ test('is valid domain', function (t) {
   t.equal(isValidDomain('xn--a--ber-goa.com'), false)
   t.equal(isValidDomain('xn--c1yn36f.example.com'), true)
   t.equal(isValidDomain('xn--addas-o4a.de'), true)
+  t.equal(isValidDomain('xn--p8j9a0d9c9a.xn--q9jyb4c'), true)
+
+  // unicode
+  t.equal(isValidDomain('はじめよう.みんな'), false)
+  t.equal(isValidDomain('名がドメイン.com'), false)
+  t.equal(isValidDomain('はじめよう.みんな', { allowUnicode: true }), true)
+  t.equal(isValidDomain('名がドメイン.com', { allowUnicode: true }), true)
 
   // invalid tld and subdomains
   t.equal(isValidDomain('localhost'), false)

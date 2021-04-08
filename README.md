@@ -36,6 +36,8 @@ isValidDomain('foo.example.com', {subdomain: false}) // false
 isValidDomain('*.example.com', {wildcard: false}) // false
 isValidDomain('*.example.com', {wildcard: true}) // true
 isValidDomain('*.example.com', {subdomain: false, wildcard: true}) // false
+isValidDomain('はじめよう.みんな')) // false
+isValidDomain('はじめよう.みんな', {allowUnicode: true})) // true
 ```
 
 view more [examples](./test/test.js)

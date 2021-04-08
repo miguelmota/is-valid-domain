@@ -1,3 +1,4 @@
+const punycode = require('punycode')
 const sldMap = require('./data/sldMap.json')
 
 module.exports = function isValidDomain (value, opts) {
@@ -7,6 +8,10 @@ module.exports = function isValidDomain (value, opts) {
 
   if (value.endsWith('.')) {
     value = value.slice(0, value.length - 1)
+  }
+
+  if (opts.allowUnicode) {
+    value = punycode.toASCII(value)
   }
 
   if (value.length > 253) {
