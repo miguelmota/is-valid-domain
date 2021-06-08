@@ -1,8 +1,9 @@
 {
   "name": "is-valid-domain",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "Validate domain name",
   "main": "index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "tape test/*.js",
     "lint": "standard --fix index.js",
