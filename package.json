@@ -58,6 +58,6 @@
     ]
   },
   "dependencies": {
-    "punycode": "^1.4.1"
+    "punycode": "^2.1.1"
   }
 }
