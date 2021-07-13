@@ -38,6 +38,8 @@ isValidDomain('*.example.com', {wildcard: true}) // true
 isValidDomain('*.example.com', {subdomain: false, wildcard: true}) // false
 isValidDomain('はじめよう.みんな') // false
 isValidDomain('はじめよう.みんな', {allowUnicode: true}) // true
+isValidDomain('ai.') // false
+isValidDomain('ai.', {topLevel: true}) // true
 ```
 
 view more [examples](./test/domain.test.js)

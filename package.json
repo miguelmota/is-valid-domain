@@ -1,6 +1,6 @@
 {
   "name": "is-valid-domain",
-  "version": "0.0.20",
+  "version": "0.1.0",
   "description": "Validate domain name",
   "main": "index.js",
   "types": "types/index.d.ts",
@@ -57,7 +57,5 @@
       "android-browser/latest"
     ]
   },
-  "dependencies": {
-    "punycode": "^2.1.1"
-  }
+  "dependencies": {}
 }

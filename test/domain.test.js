@@ -3,7 +3,7 @@ var isValidDomain = require('../')
 var sldMap = require('../data/sldMap.json')
 
 test('is valid domain', function (t) {
-  t.plan(103 + Object.keys(sldMap).length)
+  t.plan(110 + Object.keys(sldMap).length)
 
   // tld and subdomains
   t.equal(isValidDomain('example.com'), true)
@@ -39,6 +39,15 @@ test('is valid domain', function (t) {
   t.equal(isValidDomain('名がドメイン.com'), false)
   t.equal(isValidDomain('はじめよう.みんな', { allowUnicode: true }), true)
   t.equal(isValidDomain('名がドメイン.com', { allowUnicode: true }), true)
+
+  // country code tld
+  t.equal(isValidDomain('ai.'), false)
+  t.equal(isValidDomain('ai'), false)
+  t.equal(isValidDomain('ai.', { topLevel: true }), true)
+  t.equal(isValidDomain('ai', { topLevel: true }), true)
+  t.equal(isValidDomain('ae.'), false)
+  t.equal(isValidDomain('ae.', { topLevel: true }), true)
+  t.equal(isValidDomain('xx.', { topLevel: true }), false)
 
   // invalid tld and subdomains
   t.equal(isValidDomain('localhost'), false)

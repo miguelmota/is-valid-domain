@@ -1,5 +1,6 @@
 const punycode = require('punycode')
 const sldMap = require('./data/sldMap.json')
+const ccTldMap = require('./data/ccTldMap.json')
 
 module.exports = function isValidDomain (value, opts) {
   if (typeof value !== 'string') return false
@@ -21,6 +22,12 @@ module.exports = function isValidDomain (value, opts) {
   const validChars = /^([a-z0-9-._*]+)$/g
   if (!validChars.test(value)) {
     return false
+  }
+
+  if (opts.topLevel) {
+    if (ccTldMap[value.replace(/\.$/, '')]) {
+      return true
+    }
   }
 
   const sldRegex = /(.*)\.(([a-z0-9]+)(\.[a-z0-9]+))/
