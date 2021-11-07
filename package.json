@@ -6,6 +6,7 @@
   "types": "types/index.d.ts",
   "scripts": {
     "test": "tape test/*.js",
+    "th-domain-test": "tape test/thai.domain.test.js",
     "lint": "standard --fix index.js",
     "build:example": "browserify example/main.js -o example/dist/bundle.js",
     "generate": "node data/generate.js"
