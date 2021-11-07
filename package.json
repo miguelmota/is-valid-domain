@@ -1,6 +1,6 @@
 {
   "name": "is-valid-domain",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Validate domain name",
   "main": "index.js",
   "types": "types/index.d.ts",
