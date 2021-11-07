@@ -1747,7 +1747,7 @@ module.exports = function isValidDomain (value, opts) {
     return false
   }
 
-  const validChars = /^([a-z0-9-._*]+)$/g
+  const validChars = /^([\u0E00-\u0E7Fa-z0-9-._*]+)$/g
   if (!validChars.test(value)) {
     return false
   }
@@ -1758,7 +1758,7 @@ module.exports = function isValidDomain (value, opts) {
     }
   }
 
-  const sldRegex = /(.*)\.(([a-z0-9]+)(\.[a-z0-9]+))/
+  const sldRegex = /(.*)\.(([\u0E00-\u0E7Fa-z0-9]+)(\.[a-z0-9]+))/
   const matches = value.match(sldRegex)
   var tld = null
   var labels = null
@@ -1774,7 +1774,7 @@ module.exports = function isValidDomain (value, opts) {
     if (labels.length <= 1) return false
 
     tld = labels.pop()
-    const tldRegex = /^(?:xn--)?(?!^\d+$)[a-z0-9]+$/gi
+    const tldRegex = /^(?:xn--)?(?!^\d+$)[\u0E00-\u0E7Fa-z0-9]+$/gi
 
     if (!tldRegex.test(tld)) return false
   }
@@ -1786,9 +1786,9 @@ module.exports = function isValidDomain (value, opts) {
       return true
     }
 
-    let validLabelChars = /^([a-zA-Z0-9-_]+)$/g
+    let validLabelChars = /^([\u0E00-\u0E7Fa-zA-Z0-9-_]+)$/g
     if (index === labels.length - 1) {
-      validLabelChars = /^([a-zA-Z0-9-]+)$/g
+      validLabelChars = /^([\u0E00-\u0E7Fa-zA-Z0-9-]+)$/g
     }
 
     const doubleDashCount = (label.match(/--/g) || []).length
