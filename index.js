@@ -63,7 +63,8 @@ module.exports = function isValidDomain (value, opts) {
       validLabelChars = /^([\u0E00-\u0E7Fa-zA-Z0-9-]+)$/g
     }
 
-    const doubleDashCount = (label.match(/--/g) || []).length
+    // https://github.com/miguelmota/is-valid-domain/issues/22
+    const doubleDashCount = (label.match(/--(--)?/g) || []).length
     const xnDashCount = (label.match(/xn--/g) || []).length
     if (doubleDashCount !== xnDashCount) {
       return false
