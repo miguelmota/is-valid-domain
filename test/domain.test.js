@@ -61,13 +61,22 @@ test('slds from map file', function (t) {
 })
 
 test('punycode', function (t) {
-  t.plan(6)
+  t.plan(15)
   t.equal(isValidDomain('xn--6qq79v.xn--fiqz9s'), true)
   t.equal(isValidDomain('xn--ber-goa.com'), true)
   t.equal(isValidDomain('xn--a--ber-goa.com'), false)
   t.equal(isValidDomain('xn--c1yn36f.example.com'), true)
   t.equal(isValidDomain('xn--addas-o4a.de'), true)
   t.equal(isValidDomain('xn--p8j9a0d9c9a.xn--q9jyb4c'), true)
+  t.equal(isValidDomain('привет-мир.рф', { allowUnicode: true }), true)
+  t.equal(isValidDomain('test-me.рф', { allowUnicode: true }), true)
+  t.equal(isValidDomain('test--me.рф', { allowUnicode: true }), false)
+  t.equal(isValidDomain('приветмир.com', { allowUnicode: true }), true)
+  t.equal(isValidDomain('xn--b1aghctohfp.xn--p1ai', { allowUnicode: false }), true)
+  t.equal(isValidDomain('привет-мир.com', { allowUnicode: true }), true)
+  t.equal(isValidDomain('привет-мир.рф', { allowUnicode: true }), true)
+  t.equal(isValidDomain('дядя-ваня.рф', { allowUnicode: true }), true)
+  t.equal(isValidDomain('дядя-ваня.ru.com', { allowUnicode: true }), true)
 })
 
 test('unicode', function (t) {
