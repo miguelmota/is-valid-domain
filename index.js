@@ -66,7 +66,7 @@ module.exports = function isValidDomain (value, opts) {
     // https://github.com/miguelmota/is-valid-domain/issues/22
     const doubleDashCount = (label.match(/--(--)?/g) || []).length
     const xnDashCount = (label.match(/xn--/g) || []).length
-    if (doubleDashCount !== xnDashCount) {
+    if (index === labels.length - 1 && doubleDashCount !== xnDashCount) {
       return false
     }
 
