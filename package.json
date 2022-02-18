@@ -41,7 +41,7 @@
   "homepage": "https://github.com/miguelmota/is-valid-domain",
   "devDependencies": {
     "browserify": "^16.2.3",
-    "standard": "^15.0.1",
+    "standard": "^16.0.4",
     "tape": "^4.9.2"
   },
   "testling": {

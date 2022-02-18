@@ -32,8 +32,8 @@ module.exports = function isValidDomain (value, opts) {
 
   const sldRegex = /(.*)\.(([\u0E00-\u0E7Fa-z0-9]+)(\.[a-z0-9]+))/
   const matches = value.match(sldRegex)
-  var tld = null
-  var labels = null
+  let tld = null
+  let labels = null
   if (matches && matches.length > 2) {
     if (sldMap[matches[2]]) {
       tld = matches[2]
