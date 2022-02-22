@@ -21,7 +21,7 @@ test('tld and simple subdomains', function (t) {
 })
 
 test('more subdomains', function (t) {
-  t.plan(20)
+  t.plan(22)
   t.equal(isValidDomain('example.com'), true)
   t.equal(isValidDomain('foo.example.com'), true)
   t.equal(isValidDomain('example.com', { subdomain: true }), true)
@@ -42,6 +42,8 @@ test('more subdomains', function (t) {
   t.equal(isValidDomain('-foo-.-bar-.example.com', { subdomain: true }), false)
   t.equal(isValidDomain('example.com', { subdomain: false }), true)
   t.equal(isValidDomain('*.example.com', { subdomain: true }), false)
+  t.equal(isValidDomain('abcd--def.example.com', { subdomain: true }), true)
+  t.equal(isValidDomain('ab--cd.ab--cd.example.com', { subdomain: true }), true)
 })
 
 test('sld', function (t) {

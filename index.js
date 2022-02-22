@@ -32,8 +32,8 @@ module.exports = function isValidDomain (value, opts) {
 
   const sldRegex = /(.*)\.(([\u0E00-\u0E7Fa-z0-9]+)(\.[a-z0-9]+))/
   const matches = value.match(sldRegex)
-  var tld = null
-  var labels = null
+  let tld = null
+  let labels = null
   if (matches && matches.length > 2) {
     if (sldMap[matches[2]]) {
       tld = matches[2]
@@ -66,7 +66,7 @@ module.exports = function isValidDomain (value, opts) {
     // https://github.com/miguelmota/is-valid-domain/issues/22
     const doubleDashCount = (label.match(/--(--)?/g) || []).length
     const xnDashCount = (label.match(/xn--/g) || []).length
-    if (doubleDashCount !== xnDashCount) {
+    if (index === labels.length - 1 && doubleDashCount !== xnDashCount) {
       return false
     }
 
