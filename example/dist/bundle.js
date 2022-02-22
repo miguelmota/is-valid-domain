@@ -1696,17 +1696,15 @@ module.exports={
   "sch.zm": true
 }
 },{}],3:[function(require,module,exports){
-var isValidDomain = require('../')
+const isValidDomain = require('../')
 
-var domain = document.querySelector('#domain')
-var subdomain = document.querySelector('#subdomain')
-var topLevel = document.querySelector('#topLevel')
-var wildcard = document.querySelector('#wildcard')
-var unicode = document.querySelector('#unicode')
-var submit = document.querySelector('#submit')
-var output = document.querySelector('#output')
+const domain = document.querySelector('#domain')
+const subdomain = document.querySelector('#subdomain')
+const topLevel = document.querySelector('#topLevel')
+const wildcard = document.querySelector('#wildcard')
+const unicode = document.querySelector('#unicode')
+const output = document.querySelector('#output')
 
-submit.addEventListener('click', update)
 domain.addEventListener('input', update)
 subdomain.addEventListener('change', update)
 topLevel.addEventListener('change', update)
@@ -1760,8 +1758,8 @@ module.exports = function isValidDomain (value, opts) {
 
   const sldRegex = /(.*)\.(([\u0E00-\u0E7Fa-z0-9]+)(\.[a-z0-9]+))/
   const matches = value.match(sldRegex)
-  var tld = null
-  var labels = null
+  let tld = null
+  let labels = null
   if (matches && matches.length > 2) {
     if (sldMap[matches[2]]) {
       tld = matches[2]
@@ -1794,7 +1792,7 @@ module.exports = function isValidDomain (value, opts) {
     // https://github.com/miguelmota/is-valid-domain/issues/22
     const doubleDashCount = (label.match(/--(--)?/g) || []).length
     const xnDashCount = (label.match(/xn--/g) || []).length
-    if (doubleDashCount !== xnDashCount) {
+    if (index === labels.length - 1 && doubleDashCount !== xnDashCount) {
       return false
     }
 
